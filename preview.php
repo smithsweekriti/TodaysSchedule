@@ -1,12 +1,19 @@
 
 <?php require_once('header.php') ?>
-Preview of your <strong>Today's Schedule</strong>.
+Preview of your <strong>Today's Schedule </strong>for <?php echo date("d-m-Y");?>.<br/>
 <?php
+if(isset($_SESSION['err']))
+	{
+		echo '<font color=red>'.$_SESSION['err'].'</font>';
+		unset($_SESSION['err']);
+	}
+	
+else
+{
+	$sql="SELECT schedule.time,schedule.occasion,schedule.event,schedule.venue FROM schedule,scheduler WHERE schedule.occasion= scheduler.occasion && schedule.occasion= '$_SESSION[occasion]' && scheduler.username='$_SESSION[username]'";
+	$result=mysql_query($sql);
 
-$sql="SELECT schedule.time,schedule.occasion,schedule.event,schedule.venue FROM schedule,scheduler WHERE schedule.occasion= scheduler.occasion && schedule.occasion= '".$_SESSION['occasion']."' && scheduler.username='".$_SESSION['username']."'";
-$result=mysql_query($sql);
-
-if(!$result)
+	if(!$result)
 
 	echo 'Error occurred while fetching data. ';
 	else
@@ -34,11 +41,12 @@ if(!$result)
 	<td align="center"><?php echo $row['venue'] ?></td>
 
 <?php
-}
+	}
 ?>
 </tr>
 </table><br />
 
 
 <?php }
+}
 require_once('footer.php') ?>

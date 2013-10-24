@@ -1,14 +1,13 @@
 
-<?php require_once('header.php') ;
-$_SESSION['occasion']=$_POST['s'];?>
-<strong>Today's Schedule</strong> for<strong>
+<?php require_once('header.php');
 
-<?php 
-echo $_SESSION['occasion'].' as on '.date("d-m-Y").'.';
+echo $_SESSION['username'];
+?>
+ this is preview of your <strong>Today's Schedule </strong>for <?php echo date("d-m-Y");?>.
+<?php
 
-$sql="SELECT * FROM schedule WHERE occasion= '$_SESSION[occasion]' and date= '$_SESSION[today]' order by time";
+$sql="SELECT schedule.time,schedule.occasion,schedule.event,schedule.venue FROM schedule,scheduler WHERE schedule.occasion= scheduler.occasion && scheduler.username='$_SESSION[username]'";
 $result=mysql_query($sql);
-
 
 if(!$result)
 

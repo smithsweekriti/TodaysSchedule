@@ -31,7 +31,7 @@ else
 	<ul>
 		<li class="first"><a href="index.php" accesskey="1" title="">Home</a></li>
 		<li><a href="create.php" accesskey="2" title="">Create Event</a></li>
-		<li><a href="preview.php" accesskey="2" title="">Your Events</a></li>
+		<li><a href="your.php" accesskey="3" title="">Your Events</a></li>
 		
 	</ul>
 	<div id="search">
